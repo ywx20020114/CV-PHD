@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title">郁万祥 & 谢欣怡 — 学术主页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #f8f9fb; --bg-card: rgba(255,255,255,0.68);
+  --text: #1a1a2e; --text-secondary: #556270;
+  --accent: #3a6fb5; --accent-glow: rgba(58,111,181,0.12);
+  --accent-strong: #2c5a9e;
+  --border: rgba(0,0,0,0.05);
+  --overlay-light: rgba(255,255,255,0.55);
+  --overlay-dark-theme: rgba(5,8,20,0.70);
+  --font-heading: 'Noto Serif SC', 'Playfair Display', serif;
+  --font-quote: 'Playfair Display', 'Noto Serif SC', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --bg-img: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1920&q=85');
+  --bg-overlay-light: linear-gradient(160deg, rgba(248,249,251,0.60) 0%, rgba(240,244,250,0.48) 40%, rgba(232,240,250,0.55) 100%);
+  --bg-overlay-dark: linear-gradient(160deg, rgba(5,8,20,0.74) 0%, rgba(8,12,28,0.68) 50%, rgba(10,16,32,0.78) 100%);
+  --transition: 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #050814; --bg-card: rgba(20,24,42,0.72);
+  --text: #e2e4e9; --text-secondary: #8b949e;
+  --accent: #68a8f0; --accent-glow: rgba(104,168,240,0.14);
+  --accent-strong: #8bbdf5;
+  --border: rgba(255,255,255,0.06);
+  --overlay-light: rgba(5,8,20,0.60);
+  --overlay-dark-theme: rgba(5,8,20,0.78);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-overlay-light), var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: color 0.6s;
+  overflow-x: hidden;
+  position: relative;
+}
+[data-theme="dark"] body {
+  background: var(--bg-overlay-dark), var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ===== STARRY SKY ===== */
+#starfield {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: -1;
+  opacity: 0.25;
+}
+[data-theme="dark"] #starfield { opacity: 0.6; }
+
+/* ===== CONTROLS ===== */
+.controls {
+  position: fixed; top: 1.25rem; right: 1.25rem;
+  z-index: 100; display: flex; gap: 0.5rem;
+}
+.ctrl-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.ctrl-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+/* ===== GEOMETRIC DECORATIONS ===== */
+.geo-decor {
+  position: fixed;
+  pointer-events: none; z-index: -1;
+}
+.geo-circle {
+  position: fixed;
+  border-radius: 50%;
+  border: 1.5px solid rgba(58,111,181,0.12);
+  pointer-events: none; z-index: -1;
+}
+[data-theme="dark"] .geo-circle { border-color: rgba(104,168,240,0.10); }
+
+.geo-circle--1 { width: 320px; height: 320px; top: -120px; right: -80px; }
+.geo-circle--2 { width: 200px; height: 200px; bottom: -60px; left: -60px; }
+.geo-circle--3 { width: 140px; height: 140px; top: 25%; left: 8%; }
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  position: relative; z-index: 1;
+  text-align: center; padding: 2rem;
+  max-width: 1000px; width: 100%;
+}
+
+/* ===== QUOTE SECTION ===== */
+.quote-section {
+  margin-bottom: 2.5rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  opacity: 0.35;
+  margin-bottom: 1rem;
+  font-family: var(--font-quote);
+  font-style: italic;
+  line-height: 1;
+}
+
+.quote-text {
+  font-family: var(--font-quote);
+  font-size: 1.35rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  max-width: 600px;
+  opacity: 0.85;
+  transition: color 0.6s;
+}
+
+.quote-text-zh {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+}
+
+.quote-author {
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.quote-line {
+  width: 60px; height: 1.5px;
+  background: var(--accent);
+  opacity: 0.3;
+  margin: 1.25rem auto;
+  border-radius: 1px;
+}
+
+/* ===== SUBTITLE ===== */
+.subtitle {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.subtitle-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 400;
+  opacity: 0.65;
+}
+.subtitle-line {
+  width: 40px; height: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+[data-theme="dark"] .subtitle-line { background: rgba(255,255,255,0.08); }
+
+/* ===== NAME CARDS ===== */
+.names {
+  display: flex; gap: 2.5rem;
+  align-items: center; justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-link {
+  text-decoration: none; color: inherit;
+  display: block;
+}
+
+.card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 2.75rem 3.5rem;
+  cursor: pointer; position: relative;
+  transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1),
+              box-shadow 0.5s cubic-bezier(0.25,0.1,0.25,1),
+              border-color 0.5s,
+              background 0.5s;
+  border-radius: 20px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong), var(--accent));
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: 0 0 2px 2px;
+}
+.card:hover::before { opacity: 1; }
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  border-color: rgba(58,111,181,0.18);
+  background: rgba(255,255,255,0.85);
+}
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.40);
+  background: rgba(22,28,48,0.90);
+  border-color: rgba(104,168,240,0.18);
+}
+
+/* Card icon row */
+.card-icons {
+  display: flex; gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s 0.1s, transform 0.4s 0.1s;
+}
+.card:hover .card-icons { opacity: 1; transform: translateY(0); }
+.card-icon {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: var(--accent-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  color: var(--accent);
+  transition: all 0.3s;
+}
+.card:hover .card-icon {
+  background: rgba(58,111,181,0.15);
+  transform: scale(1.05);
+}
+
+.avatar {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.3rem; font-weight: 700;
+  color: #fff;
+  font-family: var(--font-heading);
+  transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1),
+              box-shadow 0.5s;
+  position: relative;
+  z-index: 1;
+}
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.5s, transform 0.5s;
+}
+.card:hover .avatar { transform: scale(1.06); }
+.card:hover .avatar::after {
+  border-color: rgba(58,111,181,0.20);
+  transform: scale(1.06);
+}
+
+.avatar-wx {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2c5a8e 40%, #4a90c4 100%);
+  box-shadow: 0 6px 24px rgba(26,58,92,0.22);
+}
+.card:hover .avatar-wx { box-shadow: 0 10px 36px rgba(26,58,92,0.35); }
+
+.avatar-xx {
+  background: linear-gradient(135deg, #1e4d6e 0%, #3a7cae 40%, #6aa8de 100%);
+  box-shadow: 0 6px 24px rgba(30,77,110,0.22);
+}
+.card:hover .avatar-xx { box-shadow: 0 10px 36px rgba(30,77,110,0.35); }
+
+.name-zh {
+  font-size: 2.4rem; font-weight: 700;
+  color: var(--text); letter-spacing: 0.08em;
+  margin: 1rem 0 0.15rem;
+  font-family: var(--font-heading);
+  transition: color 0.6s;
+}
+.name-en {
+  font-size: 0.88rem; color: var(--text-secondary);
+  font-weight: 400; letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+.tag {
+  font-size: 0.78rem; color: var(--accent);
+  font-weight: 500; letter-spacing: 0.04em;
+  background: var(--accent-glow);
+  padding: 0.35rem 1.2rem; border-radius: 20px;
+  border: 1px solid rgba(58,111,181,0.10);
+  transition: all 0.4s;
+}
+.card:hover .tag {
+  background: rgba(58,111,181,0.14);
+}
+
+.divider-symbol {
+  font-size: 1.4rem; color: var(--text-secondary);
+  font-weight: 200; user-select: none;
+  font-family: var(--font-quote);
+  font-style: italic;
+  opacity: 0.5;
+  transition: opacity 0.4s;
+}
+.divider-symbol:hover { opacity: 0.8; }
+
+/* ===== TAGLINE ===== */
+.tagline {
+  margin-top: 3rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.75rem;
+  opacity: 0.6;
+}
+.tagline-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tagline-text {
+  font-size: 0.85rem; color: var(--text-secondary);
+  letter-spacing: 0.16em; font-style: italic;
+  font-family: var(--font-body);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .names { flex-direction: column; gap: 1.5rem; }
+  .divider-symbol { font-size: 1rem; }
+  .name-zh { font-size: 1.9rem; }
+  .card { padding: 2.25rem 2.75rem; }
+  .avatar { width: 80px; height: 80px; font-size: 2rem; }
+  .controls { top: 0.75rem; right: 0.75rem; }
+  .ctrl-btn { width: 38px; height: 38px; font-size: 0.85rem; }
+  .quote-text { font-size: 1.1rem; }
+  .quote-text-zh { font-size: 1rem; }
+  .geo-circle--1 { width: 200px; height: 200px; top: -80px; right: -60px; }
+  .geo-circle--2 { width: 120px; height: 120px; bottom: -40px; left: -40px; }
+  .geo-circle--3 { display: none; }
+}
+
+@media (max-width: 400px) {
+  .name-zh { font-size: 1.6rem; }
+  .card { padding: 1.75rem 2rem; }
+  .quote-text { font-size: 0.95rem; }
+  .quote-text-zh { font-size: 0.88rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Geometric Decorations -->
+<div class="geo-circle geo-circle--1" aria-hidden="true"></div>
+<div class="geo-circle geo-circle--2" aria-hidden="true"></div>
+<div class="geo-circle geo-circle--3" aria-hidden="true"></div>
+
+<!-- Starfield -->
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<!-- Controls -->
+<div class="controls">
+  <button class="ctrl-btn" id="langToggle" title="Switch Language" aria-label="Switch language">
+    <span id="langIcon">中</span>
+  </button>
+  <button class="ctrl-btn" id="themeToggle" title="Switch Theme" aria-label="Switch theme">
+    <i class="fa-solid fa-moon" id="themeIcon"></i>
+  </button>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+  <!-- Quote -->
+  <div class="quote-section">
+    <div class="quote-icon">"</div>
+    <p class="quote-text" data-i18n="quote_en">The pursuit of knowledge is a journey without end — two minds, infinite curiosity.</p>
+    <p class="quote-text-zh" data-i18n="quote_zh">知之愈明，则行之愈笃；行之愈笃，则知之益明。</p>
+    <div class="quote-line"></div>
+    <p class="quote-author" data-i18n="quote_attr">— ZHU Xi / 朱熹</p>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="subtitle">
+    <span class="subtitle-line"></span>
+    <span class="subtitle-text" data-i18n="subtitle">Academic Portfolio</span>
+    <span class="subtitle-line"></span>
+  </div>
+
+  <!-- Name Cards -->
+  <div class="names">
+    <!-- 郁万祥 -->
+    <a href="wanxiang.html" class="card-link">
+      <div class="card">
+        <div class="card-icons">
+          <span class="card-icon"><i class="fa-solid fa-code"></i></span>
+          <span class="card-icon"><i class="fa-solid fa-robot"></i></span>
+          <span class="card-icon"><i class="fa-solid fa-flask"></i></span>
+        </div>
+        <div class="avatar avatar-wx">郁</div>
+        <div class="name-zh" data-i18n="wx_name">郁&nbsp;万&nbsp;祥</div>
+        <div class="name-en">Wanxiang Yu</div>
+        <span class="tag" data-i18n="wx_tag">软件工程 · AI 代码迁移</span>
+      </div>
+    </a>
+
+    <span class="divider-symbol">&amp;</span>
+
+    <!-- 谢欣怡 -->
+    <a href="xinyi.html" class="card-link">
+      <div class="card">
+        <div class="card-icons">
+          <span class="card-icon"><i class="fa-solid fa-atom"></i></span>
+          <span class="card-icon"><i class="fa-solid fa-microscope"></i></span>
+          <span class="card-icon"><i class="fa-solid fa-vial"></i></span>
+        </div>
+        <div class="avatar avatar-xx">谢</div>
+        <div class="name-zh" data-i18n="xx_name">谢&nbsp;欣&nbsp;怡</div>
+        <div class="name-en">Xinyi Xie</div>
+        <span class="tag" data-i18n="xx_tag">化学 · 有机半导体材料</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Tagline -->
+  <div class="tagline">
+    <span class="tagline-dot"></span>
+    <span class="tagline-text" data-i18n="bottom_tagline">Two Researchers, One Vision</span>
+    <span class="tagline-dot"></span>
+  </div>
+
+</div>
+
+<script>
+// ===== I18N =====
+const i18n = {
+  zh: {
+    title: '郁万祥 & 谢欣怡 — 学术主页',
+    quote_en: 'The pursuit of knowledge is a journey without end — two minds, infinite curiosity.',
+    quote_zh: '知之愈明，则行之愈笃；行之愈笃，则知之益明。',
+    quote_attr: '— 朱熹 · Zhu Xi',
+    subtitle: '学术主页',
+    wx_name: '郁&nbsp;万&nbsp;祥',
+    wx_tag: '软件工程 · AI 代码迁移',
+    xx_name: '谢&nbsp;欣&nbsp;怡',
+    xx_tag: '化学 · 有机半导体材料',
+    bottom_tagline: '两位研究者，同一愿景',
+  },
+  en: {
+    title: 'Wanxiang Yu & Xinyi Xie — Academic Portfolio',
+    quote_en: 'The pursuit of knowledge is a journey without end — two minds, infinite curiosity.',
+    quote_zh: 'The more you know, the more you act; the more you act, the more you know.',
+    quote_attr: '— Zhu Xi',
+    subtitle: 'Academic Portfolio',
+    wx_name: 'Wanxiang Yu',
+    wx_tag: 'Software Eng. · AI Code Migration',
+    xx_name: 'Xinyi Xie',
+    xx_tag: 'Chemistry · Organic Semiconductors',
+    bottom_tagline: 'Two Researchers, One Vision',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'zh';
+let currentTheme = localStorage.getItem('theme') || 'light';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  const langIcon = document.getElementById('langIcon');
+  if (langIcon) langIcon.textContent = lang === 'zh' ? '中' : 'EN';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+  document.title = i18n[lang].title;
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem('theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = document.getElementById('themeIcon');
+  icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
+
+document.getElementById('langToggle').addEventListener('click', () => {
+  applyLang(currentLang === 'zh' ? 'en' : 'zh');
+});
+document.getElementById('themeToggle').addEventListener('click', () => {
+  applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});
+
+// Init
+applyLang(currentLang);
+applyTheme(currentTheme);
+
+// ===== STARFIELD =====
+(function() {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [], w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function initStars(count) {
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.6 + 0.3,
+        a: Math.random(),
+        speed: Math.random() * 0.008 + 0.003,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    const isDark = currentTheme === 'dark';
+    const baseColor = isDark ? '200,225,255' : '60,100,160';
+    stars.forEach(s => {
+      s.a += s.speed;
+      const alpha = 0.25 + Math.sin(s.a + s.phase) * 0.35;
+      const finalAlpha = isDark ? alpha : alpha * 0.4;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${baseColor},${finalAlpha.toFixed(2)})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initStars(window.innerWidth < 768 ? 70 : 140);
+  draw();
+
+  window.addEventListener('resize', () => {
+    resize();
+    initStars(window.innerWidth < 768 ? 70 : 140);
+  });
+})();
+</script>
+</body>
+</html>

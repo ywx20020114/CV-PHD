@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title">郁万祥 — 学术主页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #f8f9fb; --bg-elevated: #ffffff;
+  --text: #1a1a2e; --text-secondary: #4a5568;
+  --accent: #3a6fb5; --accent-light: #e8f1fb;
+  --border: rgba(0,0,0,0.06); --border-subtle: rgba(0,0,0,0.04);
+  --shadow: 0 2px 16px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.06);
+  --radius: 14px; --radius-sm: 10px;
+  --font-heading: 'Noto Serif SC', 'Inter', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #050814; --bg-elevated: #0d1117;
+  --text: #e2e4e9; --text-secondary: #8b949e;
+  --accent: #68a8f0; --accent-light: rgba(104,168,240,0.10);
+  --border: rgba(255,255,255,0.07); --border-subtle: rgba(255,255,255,0.04);
+  --shadow: 0 2px 16px rgba(0,0,0,0.20);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.30);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; overflow-x: hidden;
+  padding-top: 60px;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* ===== STARRY CANVAS ===== */
+#starfield {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+  opacity: 0.3;
+}
+[data-theme="dark"] #starfield { opacity: 0.65; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.5s, box-shadow 0.3s, border-color 0.5s;
+}
+nav.scrolled { box-shadow: var(--shadow); }
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 2rem; display: flex;
+  align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-left { display: flex; align-items: center; gap: 1rem; }
+.nav-back {
+  font-weight: 600; font-size: 0.88rem;
+  color: var(--accent); display: flex;
+  align-items: center; gap: 0.35rem;
+  text-decoration: none; transition: opacity 0.3s;
+}
+.nav-back:hover { opacity: 0.7; }
+.nav-brand {
+  font-weight: 700; font-size: 1rem;
+  color: var(--text); letter-spacing: 0.03em;
+}
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--text-secondary); letter-spacing: 0.03em;
+  text-decoration: none; position: relative;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--accent); border-radius: 1px;
+  transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-partner {
+  font-size: 0.78rem; padding: 0.35rem 0.9rem;
+  border: 1.5px solid var(--accent); border-radius: 20px;
+  color: var(--accent); font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.nav-partner:hover { background: var(--accent); color: #fff; }
+.nav-partner::after { display: none !important; }
+
+.nav-toggle { display: none; background: none; border: none;
+  font-size: 1.25rem; color: var(--text); cursor: pointer; padding: 0.2rem; }
+
+.nav-actions { display: flex; gap: 0.4rem; align-items: center; }
+.nav-actions .ctrl-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--text-secondary);
+  font-size: 0.85rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+.nav-actions .ctrl-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative; z-index: 1;
+  padding: 3rem 2rem 2.5rem;
+}
+.hero-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2.5rem;
+}
+.hero-avatar {
+  width: 100px; height: 100px; min-width: 100px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem; font-weight: 700; color: #fff;
+  font-family: var(--font-heading);
+  background: linear-gradient(135deg, #1a3a5c, #4a90c4);
+  box-shadow: 0 6px 24px rgba(26,58,92,0.25);
+}
+.hero-text h1 {
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--text); letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+  font-family: var(--font-heading);
+}
+.hero-text .en-name { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.4rem; }
+.hero-text .inst { font-size: 0.9rem; color: var(--accent); font-weight: 500; }
+.hero-text .inst-sub { font-size: 0.82rem; color: var(--text-secondary); margin-top:0.1rem; }
+
+.keywords { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
+.keywords span {
+  font-size: 0.76rem; padding: 0.28rem 0.85rem;
+  background: var(--accent-light); color: var(--accent);
+  border-radius: 20px; font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(58,111,181,0.10);
+}
+
+/* ===== SECTIONS ===== */
+.section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; position: relative; z-index: 1; }
+.section-title {
+  font-size: 1.35rem; font-weight: 700; color: var(--text);
+  margin-bottom: 1.75rem; display: flex; align-items: center;
+  gap: 0.55rem; letter-spacing: 0.03em;
+  font-family: var(--font-heading);
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border); margin-left: 0.5rem;
+}
+.section-title i { color: var(--accent); font-size: 1.05rem; }
+
+/* ===== TIMELINE ===== */
+.timeline { position: relative; }
+.timeline-item {
+  display: flex; gap: 1.25rem;
+  padding: 1.2rem 1.25rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition);
+}
+.timeline-item:hover { border-color: var(--border); }
+.timeline-dot {
+  width: 10px; height: 10px; min-width: 10px;
+  border-radius: 50%; background: var(--accent);
+  margin-top: 0.45rem;
+}
+.timeline-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+.timeline-content .tl-date { font-size: 0.78rem; color: var(--accent); font-weight: 500; margin: 0.15rem 0; }
+.timeline-content .tl-detail { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* ===== TAG LIST ===== */
+.tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag-list li {
+  font-size: 0.81rem; padding: 0.38rem 1rem;
+  background: var(--accent-light); color: var(--accent);
+  border-radius: 20px; font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(58,111,181,0.08);
+}
+
+/* ===== PUBS ===== */
+.pub-item {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.65rem;
+  transition: border-color var(--transition);
+}
+.pub-item:hover { border-color: var(--border); }
+.pub-item h3 { font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.5; }
+.pub-authors { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; }
+.pub-venue { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-top: 0.2rem; }
+
+/* ===== CARDS GRID ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  transition: all var(--transition);
+  display: flex; flex-direction: column;
+}
+.card:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+.card-tag {
+  font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent);
+  font-weight: 600; margin-bottom: 0.45rem;
+}
+.card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.45rem; line-height: 1.4; }
+.card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.card-meta {
+  font-size: 0.76rem; color: var(--accent); font-weight: 500;
+  margin-top: 0.65rem; display: flex; align-items: center; gap: 0.3rem;
+}
+
+/* ===== CONTACT ===== */
+.contact-list { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.contact-item {
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.7rem 1.2rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem; color: var(--text);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.contact-item:hover { border-color: var(--accent); }
+.contact-item i { color: var(--accent); font-size: 1rem; width: 18px; text-align: center; }
+
+/* ===== DIVIDER ===== */
+.divider { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+.divider hr { border: none; border-top: 1px solid var(--border-subtle); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg-elevated); border-top: 1px solid var(--border);
+  text-align: center; padding: 2rem;
+  font-size: 0.8rem; color: var(--text-secondary);
+  letter-spacing: 0.04em; position: relative; z-index: 1;
+}
+footer span { color: var(--accent); font-weight: 500; }
+
+/* ===== FADE-IN ===== */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== BACK TO TOP ===== */
+.back-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 1rem; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  transition: all var(--transition);
+  box-shadow: var(--shadow);
+}
+.back-top.show { display: flex; }
+.back-top:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links, .nav-ctrls { display: none; }
+  .nav-actions { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 60px; left: 0; right: 0;
+    background: var(--bg); padding: 1.25rem 2rem;
+    gap: 0.85rem; border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open .nav-ctrls { display: flex; margin-left: 0; margin-top: 0.25rem; }
+  .nav-toggle { display: block; }
+
+  .hero-inner { flex-direction: column; text-align: center; gap: 1.25rem; }
+  .hero-text h1 { font-size: 1.7rem; }
+  .keywords { justify-content: center; }
+
+  .cards { grid-template-columns: 1fr; }
+  .section { padding: 2.5rem 1.25rem; }
+  .hero { padding: 2.5rem 1.25rem 2rem; }
+  .contact-list { flex-direction: column; }
+}
+@media (max-width: 400px) {
+  .hero-avatar { width: 80px; height: 80px; min-width: 80px; font-size: 2rem; }
+  .hero-text h1 { font-size: 1.45rem; }
+  .section-title { font-size: 1.15rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html" class="nav-back"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_back">主页</span></a>
+      <span class="nav-brand">Wanxiang Yu</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" data-i18n="nav_about">关于</a>
+      <a href="#research" data-i18n="nav_research">研究方向</a>
+      <a href="#pub" data-i18n="nav_pub">论文发表</a>
+      <a href="#projects" data-i18n="nav_projects">项目经历</a>
+      <a href="#contact" data-i18n="nav_contact">联系方式</a>
+      <a href="xinyi.html" class="nav-partner" data-i18n="nav_partner">谢欣怡 →</a>
+    </div>
+    <div class="nav-actions">
+      <button class="ctrl-btn" id="langToggle" title="Switch Language"><span id="langIcon">中</span></button>
+      <button class="ctrl-btn" id="themeToggle" title="Switch Theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div class="hero-avatar">郁</div>
+    <div class="hero-text">
+      <h1 data-i18n="hero_name">郁&nbsp;万&nbsp;祥</h1>
+      <p class="en-name">Wanxiang Yu</p>
+      <p class="inst" data-i18n="hero_inst">南开大学 · 软件学院</p>
+      <p class="inst-sub" data-i18n="hero_degree">硕士研究生 · 软件工程 · 2024 − 2027</p>
+      <div class="keywords">
+        <span data-i18n="kw1">AI 代码迁移</span><span data-i18n="kw2">检索增强生成</span><span data-i18n="kw3">多智能体协作</span><span data-i18n="kw4">GUI 测试</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <h2 class="section-title reveal"><i class="fa-solid fa-user-graduate"></i> <span data-i18n="sec_about">教育背景</span></h2>
+  <div class="reveal">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4 data-i18n="edu1_title">南开大学 · 软件工程 硕士</h4>
+          <p class="tl-date" data-i18n="edu1_date">2024 年 9 月 − 2027 年 6 月</p>
+          <p class="tl-detail" data-i18n="edu1_detail">导师：张玉志 教授 | GPA: 3.79 / 4.0</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4 data-i18n="edu2_title">南开大学 · 软件工程 学士</h4>
+          <p class="tl-date" data-i18n="edu2_date">2020 年 9 月 − 2024 年 6 月</p>
+          <p class="tl-detail" data-i18n="edu2_detail">GPA: Top 25%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research" style="padding-top:0;">
+  <h2 class="section-title reveal"><i class="fa-solid fa-flask"></i> <span data-i18n="sec_research">研究方向</span></h2>
+  <div class="reveal">
+    <ul class="tag-list">
+      <li data-i18n="r1">自动化代码迁移</li>
+      <li data-i18n="r2">检索增强生成 (RAG)</li>
+      <li data-i18n="r3">多智能体协作</li>
+      <li data-i18n="r4">大语言模型 (LLM)</li>
+      <li data-i18n="r5">GUI 行为等价性验证</li>
+      <li data-i18n="r6">编译反馈自修复</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="pub">
+  <h2 class="section-title reveal"><i class="fa-solid fa-file-lines"></i> <span data-i18n="sec_pub">论文发表</span></h2>
+  <div class="reveal">
+    <div class="pub-item">
+      <h3>CoMRA: A Framework for Automated Code Migration via Retrieval-Augmented Generation and Multi-Agent Collaboration</h3>
+      <p class="pub-authors">Bin Lu, <strong>Wanxiang Yu</strong>, Haolin Wang, Jiayi Zhao, Yuzhi Zhang, and Rui Chen</p>
+      <p class="pub-venue"><i class="fa-solid fa-trophy"></i> SANER 2026</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <h2 class="section-title reveal"><i class="fa-solid fa-diagram-project"></i> <span data-i18n="sec_projects">项目经历</span></h2>
+  <div class="cards">
+    <div class="card reveal">
+      <span class="card-tag" data-i18n="proj1_tag">主要贡献者 · 学生二作</span>
+      <h3 data-i18n="proj1_title">CoMRA：检索增强多智能体代码迁移框架</h3>
+      <p data-i18n="proj1_desc">实现 Qt4→Qt5 自动化迁移，在 194 个项目的基准测试中达到 98% 编译与功能通过率，仅需 0.8 小时运行时间。设计三智能体（检测-迁移-验证）协作架构，构建结构化迁移知识库，通过编译反馈闭环实现五次修复内收敛。跨生态验证于 Python 2→3 与 Java 8→17。</p>
+      <div class="card-meta"><i class="fa-solid fa-check-circle"></i> <span data-i18n="proj1_meta">SANER 2026</span></div>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag" data-i18n="proj2_tag">扩展研究</span>
+      <h3 data-i18n="proj2_title">CoMRA-GUI：规约驱动的 GUI 行为验证</h3>
+      <p data-i18n="proj2_desc">提出纯文本 GUI 规约语言 DGCL，建立结构-属性-行为三层等价性验证框架。检测五类编译不可见缺陷（信号断连、属性语义偏移、控件丢失等），引入规约差异反馈驱动语义级迭代修复，实现从语法驱动到规约驱动的方法论升级。</p>
+      <div class="card-meta"><i class="fa-solid fa-code"></i> <span data-i18n="proj2_meta">研究进行中</span></div>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag" data-i18n="proj3_tag">Shopee · 实习</span>
+      <h3 data-i18n="proj3_title">LLM 定价监控智能代理</h3>
+      <p data-i18n="proj3_desc">开发自动化定价采集与异常检测代理，通过变化检测算法实时发现价格波动，经 API 网关推送告警至企业 IM。设计可溯源评估框架，每条消息携带完整审计链（来源、行号、新旧值、时间戳）。</p>
+      <div class="card-meta"><i class="fa-solid fa-building"></i> <span data-i18n="proj3_meta">2025.06 − 2026.04</span></div>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag" data-i18n="proj4_tag">Tencent · 实习</span>
+      <h3 data-i18n="proj4_title">实时推荐系统优化</h3>
+      <p data-i18n="proj4_desc">参与高吞吐低延迟实时推荐系统开发，负责候选召回与排序管线。在亿级请求规模下优化系统吞吐与延迟，积累微服务架构、RPC 框架及生产环境性能调优经验。</p>
+      <div class="card-meta"><i class="fa-solid fa-building"></i> <span data-i18n="proj4_meta">2026 年夏季</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title reveal"><i class="fa-solid fa-award"></i> <span data-i18n="sec_awards">荣誉奖项</span></h2>
+  <div class="cards reveal">
+    <div class="card">
+      <span class="card-tag">2024 · 2025</span>
+      <h3 data-i18n="award1_title">南开大学公能奖学金</h3>
+      <p data-i18n="award1_desc">连续两年获得，表彰学术研究与综合素质优异表现。</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">2025</span>
+      <h3 data-i18n="award2_title">南开大学文体奖学金</h3>
+      <p data-i18n="award2_desc">表彰在体育与文化艺术活动中的突出贡献。</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2 class="section-title reveal"><i class="fa-solid fa-envelope"></i> <span data-i18n="sec_contact">联系方式</span></h2>
+  <div class="contact-list reveal">
+    <a href="mailto:onexiangg.yu@gmail.com" class="contact-item">
+      <i class="fa-solid fa-envelope"></i> onexiangg.yu@gmail.com
+    </a>
+    <a href="https://github.com/ywx20020114" target="_blank" rel="noopener" class="contact-item">
+      <i class="fa-brands fa-github"></i> github.com/ywx20020114
+    </a>
+    <span class="contact-item">
+      <i class="fa-solid fa-phone"></i> +86 19815840515
+    </span>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>Wanxiang Yu</span> · <span data-i18n="footer_inst">南开大学软件学院</span> · All Rights Reserved</p>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+// ===== I18N =====
+const i18n = {
+  zh: {
+    title:'郁万祥 — 学术主页', nav_back:'主页', nav_about:'关于', nav_research:'研究方向',
+    nav_pub:'论文发表', nav_projects:'项目经历', nav_contact:'联系方式', nav_partner:'谢欣怡 →',
+    hero_name:'郁&nbsp;万&nbsp;祥', hero_inst:'南开大学 · 软件学院', hero_degree:'硕士研究生 · 软件工程 · 2024 − 2027',
+    kw1:'AI 代码迁移',kw2:'检索增强生成',kw3:'多智能体协作',kw4:'GUI 测试',
+    sec_about:'教育背景', edu1_title:'南开大学 · 软件工程 硕士', edu1_date:'2024 年 9 月 − 2027 年 6 月',
+    edu1_detail:'导师：张玉志 教授 | GPA: 3.79 / 4.0', edu2_title:'南开大学 · 软件工程 学士',
+    edu2_date:'2020 年 9 月 − 2024 年 6 月', edu2_detail:'GPA: Top 25%',
+    sec_research:'研究方向', r1:'自动化代码迁移',r2:'检索增强生成 (RAG)',r3:'多智能体协作',
+    r4:'大语言模型 (LLM)',r5:'GUI 行为等价性验证',r6:'编译反馈自修复',
+    sec_pub:'论文发表', sec_projects:'项目经历',
+    proj1_tag:'主要贡献者 · 学生二作', proj1_title:'CoMRA：检索增强多智能体代码迁移框架',
+    proj1_desc:'实现 Qt4→Qt5 自动化迁移，在 194 个项目的基准测试中达到 98% 编译与功能通过率，仅需 0.8 小时运行时间。设计三智能体（检测-迁移-验证）协作架构，构建结构化迁移知识库，通过编译反馈闭环实现五次修复内收敛。跨生态验证于 Python 2→3 与 Java 8→17。',
+    proj1_meta:'SANER 2026', proj2_tag:'扩展研究', proj2_title:'CoMRA-GUI：规约驱动的 GUI 行为验证',
+    proj2_desc:'提出纯文本 GUI 规约语言 DGCL，建立结构-属性-行为三层等价性验证框架。检测五类编译不可见缺陷（信号断连、属性语义偏移、控件丢失等），引入规约差异反馈驱动语义级迭代修复，实现从语法驱动到规约驱动的方法论升级。',
+    proj2_meta:'研究进行中', proj3_tag:'Shopee · 实习', proj3_title:'LLM 定价监控智能代理',
+    proj3_desc:'开发自动化定价采集与异常检测代理，通过变化检测算法实时发现价格波动，经 API 网关推送告警至企业 IM。设计可溯源评估框架，每条消息携带完整审计链（来源、行号、新旧值、时间戳）。',
+    proj3_meta:'2025.06 − 2026.04', proj4_tag:'Tencent · 实习', proj4_title:'实时推荐系统优化',
+    proj4_desc:'参与高吞吐低延迟实时推荐系统开发，负责候选召回与排序管线。在亿级请求规模下优化系统吞吐与延迟，积累微服务架构、RPC 框架及生产环境性能调优经验。',
+    proj4_meta:'2026 年夏季', sec_awards:'荣誉奖项',
+    award1_title:'南开大学公能奖学金', award1_desc:'连续两年获得，表彰学术研究与综合素质优异表现。',
+    award2_title:'南开大学文体奖学金', award2_desc:'表彰在体育与文化艺术活动中的突出贡献。',
+    sec_contact:'联系方式', footer_inst:'南开大学软件学院'
+  },
+  en: {
+    title:'Wanxiang Yu — Academic Homepage', nav_back:'Home', nav_about:'About',
+    nav_research:'Research', nav_pub:'Publications', nav_projects:'Projects', nav_contact:'Contact',
+    nav_partner:'Xinyi Xie →',
+    hero_name:'Wanxiang Yu', hero_inst:'Nankai University · College of Software',
+    hero_degree:'M.S. in Software Engineering · 2024 − 2027',
+    kw1:'AI Code Migration',kw2:'Retrieval-Augmented Generation',kw3:'Multi-Agent Collaboration',kw4:'GUI Testing',
+    sec_about:'Education', edu1_title:'M.S. in Software Engineering, Nankai University',
+    edu1_date:'Sep. 2024 − Jun. 2027', edu1_detail:'Advisor: Prof. Yuzhi Zhang | GPA: 3.79 / 4.0',
+    edu2_title:'B.Eng. in Software Engineering, Nankai University',
+    edu2_date:'Sep. 2020 − Jun. 2024', edu2_detail:'GPA: Top 25%',
+    sec_research:'Research Interests', r1:'Automated Code Migration',r2:'Retrieval-Augmented Generation',
+    r3:'Multi-Agent Collaboration',r4:'Large Language Models',r5:'GUI Behavioral Equivalence Verification',
+    r6:'Compilation-Feedback Self-Repair',
+    sec_pub:'Publications', sec_projects:'Projects',
+    proj1_tag:'Primary Contributor · 2nd Author', proj1_title:'CoMRA: Retrieval-Augmented Multi-Agent Code Migration Framework',
+    proj1_desc:'Achieved 98% compilation and functional pass rates on Qt4→Qt5 migration (194 projects) with 0.8h runtime. Designed a three-agent (detection–migration–verification) collaborative architecture, built a structured migration knowledge base, and converged within five repair attempts via a compilation-feedback loop. Cross-ecosystem validation on Python 2→3 and Java 8→17.',
+    proj1_meta:'SANER 2026', proj2_tag:'Extended Research', proj2_title:'CoMRA-GUI: Specification-Driven Behavioral Verification for Automated Code Migration',
+    proj2_desc:'Proposed DGCL, a pure-text GUI specification language, and established a three-tier verification framework (structural, property, behavioral equivalence). Detects five categories of compilation-invisible defects, feeding specification-diff results into the repair loop for semantic-level iteration.',
+    proj2_meta:'In Progress', proj3_tag:'Shopee · Internship', proj3_title:'LLM Pricing Monitoring Agent',
+    proj3_desc:'Developed an automated pricing monitoring agent that periodically scrapes LLM pricing data, detects fluctuations via change detection algorithms, and delivers real-time alerts to enterprise IM groups. Designed a traceability-driven evaluation framework with full audit trails.',
+    proj3_meta:'Jun. 2025 − Apr. 2026', proj4_tag:'Tencent · Internship', proj4_title:'Real-Time Recommendation System Optimization',
+    proj4_desc:'Contributed to a high-throughput, low-latency real-time recommendation system, participating in candidate retrieval and ranking pipeline development. Optimized system throughput and latency under billion-scale request volumes.',
+    proj4_meta:'Summer 2026', sec_awards:'Honors & Awards',
+    award1_title:'Nankai University Gongneng Scholarship', award1_desc:'Awarded twice (2024, 2025) for outstanding academic research and comprehensive performance.',
+    award2_title:'Nankai University Sports & Arts Scholarship', award2_desc:'Recognizing outstanding contributions to sports and cultural activities.',
+    sec_contact:'Contact', footer_inst:'College of Software, Nankai University'
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'zh';
+let currentTheme = localStorage.getItem('theme') || 'light';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  const langIcon = document.getElementById('langIcon');
+  if (langIcon) langIcon.textContent = lang === 'zh' ? '中' : 'EN';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+  document.title = i18n[lang].title;
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem('theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = document.getElementById('themeIcon');
+  if (icon) {
+    icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  }
+}
+
+document.getElementById('langToggle').addEventListener('click', () => applyLang(currentLang === 'zh' ? 'en' : 'zh'));
+document.getElementById('themeToggle').addEventListener('click', () => applyTheme(currentTheme === 'dark' ? 'light' : 'dark'));
+
+applyLang(currentLang);
+applyTheme(currentTheme);
+
+// ===== NAV =====
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+function closeNav() { document.getElementById('navLinks').classList.remove('open'); }
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  const btn = document.getElementById('backTop');
+  if (btn) btn.classList.toggle('show', window.scrollY > 400);
+});
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (link && link.getAttribute('href') !== '#') {
+    e.preventDefault();
+    const t = document.querySelector(link.getAttribute('href'));
+    if (t) { window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' }); closeNav(); }
+  }
+});
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== STARFIELD =====
+(function() {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [], w, h;
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  function init(n) {
+    stars = [];
+    for (let i = 0; i < n; i++) stars.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.6+0.3, a: Math.random(), s: Math.random()*0.008+0.003, p: Math.random()*Math.PI*2 });
+  }
+  function draw() {
+    ctx.clearRect(0,0,w,h);
+    const c = currentTheme === 'dark' ? '200,220,255' : '60,100,160';
+    stars.forEach(s => { s.a += s.s; const alpha = 0.25+Math.sin(s.a+s.p)*0.35; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle = `rgba(${c},${(currentTheme==='dark'?alpha:alpha*0.45).toFixed(2)})`; ctx.fill(); });
+    requestAnimationFrame(draw);
+  }
+  resize(); init(window.innerWidth < 768 ? 70 : 140); draw();
+  window.addEventListener('resize', () => { resize(); init(window.innerWidth < 768 ? 70 : 140); });
+})();
+</script>
+</body>
+</html>
