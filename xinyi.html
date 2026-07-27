@@ -188,6 +188,18 @@ nav.scrolled { box-shadow: var(--shadow); }
   border-radius: 50%; background: var(--accent);
   margin-top: 0.45rem;
 }
+.timeline-content { flex: 1; min-width: 0; }
+.education-title {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem;
+}
+.timeline-school-logo {
+  width: 46px; height: 46px; min-width: 46px; padding: 2px;
+  object-fit: contain; background: #fff;
+  border: 1px solid rgba(0,0,0,0.07); border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+.timeline-school-logo--wide { object-fit: cover; object-position: left center; }
 .timeline-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--text); }
 .timeline-content .tl-date { font-size: 0.78rem; color: var(--accent); font-weight: 500; margin: 0.15rem 0; }
 .timeline-content .tl-detail { font-size: 0.82rem; color: var(--text-secondary); }
@@ -322,6 +334,7 @@ footer span { color: var(--accent); font-weight: 500; }
   .hero-avatar { width: 80px; height: 80px; min-width: 80px; font-size: 2rem; }
   .hero-text h1 { font-size: 1.45rem; }
   .section-title { font-size: 1.15rem; }
+  .timeline-school-logo { width: 40px; height: 40px; min-width: 40px; }
 }
 </style>
 </head>
@@ -377,7 +390,10 @@ footer span { color: var(--accent); font-weight: 500; }
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h4 data-i18n="edu1_title">天津大学 · 化学 硕士</h4>
+          <div class="education-title">
+            <h4 data-i18n="edu1_title">天津大学 · 化学 硕士</h4>
+            <img class="timeline-school-logo" src="assets/universities/tianjin-university.svg" alt="天津大学校徽" loading="lazy" decoding="async">
+          </div>
           <p class="tl-date" data-i18n="edu1_date">2024 年 9 月 − 2027 年 6 月</p>
           <p class="tl-detail" data-i18n="edu1_detail">导师：李立强 教授、陈小松 教授 | GPA: 3.71 / 4.0</p>
           <p class="tl-detail" data-i18n="edu1_lab" style="margin-top:0.15rem;">智能传感材料国家重点实验室</p>
@@ -386,7 +402,10 @@ footer span { color: var(--accent); font-weight: 500; }
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h4 data-i18n="edu2_title">武汉工程大学 · 能源与动力工程 学士</h4>
+          <div class="education-title">
+            <h4 data-i18n="edu2_title">武汉工程大学 · 能源与动力工程 学士</h4>
+            <img class="timeline-school-logo timeline-school-logo--wide" src="assets/universities/wuhan-institute-of-technology.png" alt="武汉工程大学校徽" loading="lazy" decoding="async">
+          </div>
           <p class="tl-date" data-i18n="edu2_date">2020 年 9 月 − 2024 年 6 月</p>
           <p class="tl-detail" data-i18n="edu2_detail">GPA: 3.75 / 4.0 | 排名: 3 / 131</p>
         </div>
