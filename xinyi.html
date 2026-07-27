@@ -468,7 +468,7 @@ footer span { color: var(--accent); font-weight: 500; }
     <div class="card reveal">
       <span class="card-tag" data-i18n="proj2_tag">第一作者 · 主要贡献者</span>
       <h3 data-i18n="proj2_title">真空蒸镀法晶圆级单层分子晶体生长</h3>
-      <p data-i18n="proj2_desc">开发改进型真空蒸镀法，10 分钟内在 SiO₂/Si 衬底上直接生长连续均匀的 4 英寸晶圆级 MMC，突破非晶衬底上晶圆级 MMC 生长瓶颈。独立完成蒸镀腔体改造与装置搭建，制备高密度 OFET 阵列，并探索短沟道器件与晶圆级反相器电路集成应用。</p>
+      <p data-i18n="proj2_desc">开发改进型真空蒸镀法，10 分钟内在 SiO₂/Si 衬底上直接生长连续均匀的 4 英寸晶圆级 MMC，突破非晶衬底上晶圆级 MMC 生长瓶颈。独立完成蒸镀腔体改造与装置搭建，制备兼具高迁移率与优异均匀性的晶圆级高密度 OFET 阵列，并探索短沟道器件；通过光刻图案化电极与栅极结构，采用转移集成制备晶圆级顶栅反相器阵列。</p>
       <div class="card-meta"><i class="fa-solid fa-microchip"></i> <span data-i18n="proj2_meta">研究进行中</span></div>
     </div>
     <div class="card reveal">
@@ -476,6 +476,12 @@ footer span { color: var(--accent); font-weight: 500; }
       <h3 data-i18n="proj3_title">PECVD 法共价富勒烯网络 (Graphullerene)</h3>
       <p data-i18n="proj3_desc">开发 PECVD 法生长毫米级体晶 C₆₀ 聚合物 (graphullerite)，可机械剥离至分子级薄层 graphullerene（最薄 1.5 nm）。通过 Raman、PL、SEM、TEM、AFM-IR、XPS 系统表征，TDTR/SThM 测量揭示热导率随厚度减小而增大、体晶与少层间高达十倍差异。</p>
       <div class="card-meta"><i class="fa-solid fa-atom"></i> <span data-i18n="proj3_meta">二维电子器件应用</span></div>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag" data-i18n="proj4_tag">参与成员</span>
+      <h3 data-i18n="proj4_title">基于大语言模型的有机半导体器件研究 AI Agent</h3>
+      <p data-i18n="proj4_desc">参与开发基于大语言模型的有机半导体器件研究 AI Agent，实现 OFET 文献数据自动抽取、机器学习预测与数据驱动优化。基于 277 篇论文构建含 709 种器件配置、超过 10,000 条记录的标准化数据库；GPT-4 在 14 类参数上的平均精确率与召回率均超过 92%，XGBoost 分类器 F1 = 0.88，并通过优化策略将 DP-DTT OFET 迁移率提升约 3 倍。</p>
+      <div class="card-meta"><i class="fa-solid fa-database"></i> <span data-i18n="proj4_meta">数据抽取 · 机器学习 · 器件优化</span></div>
     </div>
   </div>
 </section>
@@ -501,7 +507,8 @@ footer span { color: var(--accent); font-weight: 500; }
     <div class="card"><span class="card-tag">2023</span><h3 data-i18n="aw3_title">全国大学生数学竞赛</h3><p data-i18n="aw3_desc">国家级二等奖</p></div>
     <div class="card"><span class="card-tag">2023</span><h3 data-i18n="aw4_title">蓝桥杯 Python 竞赛</h3><p data-i18n="aw4_desc">湖北省一等奖</p></div>
     <div class="card"><span class="card-tag">2024−2026</span><h3 data-i18n="aw5_title">天津大学一等研究生奖学金</h3><p data-i18n="aw5_desc">连续三年获得</p></div>
-    <div class="card"><span class="card-tag">2024</span><h3 data-i18n="aw6_title">全国能源动力类百篇优秀本科毕业论文</h3><p data-i18n="aw6_desc">全国百优毕业设计</p></div>
+    <div class="card"><span class="card-tag">2020−2024</span><h3 data-i18n="aw6_title">武汉工程大学一等奖学金</h3><p data-i18n="aw6_desc">连续四年获得</p></div>
+    <div class="card"><span class="card-tag">2024</span><h3 data-i18n="aw7_title">全国能源动力类百篇优秀本科毕业论文</h3><p data-i18n="aw7_desc">全国百优毕业设计</p></div>
   </div>
 </section>
 
@@ -558,11 +565,14 @@ const i18n = {
     proj1_desc:'提出自限生长策略，通过 PVT 在 SiO₂/Si 衬底上直接生长厘米级有机半导体单层分子晶体 (MMC)。引入氢气调控生长压力，C₁₀-DNTT MMC 尺寸达 8.2 cm × 2 cm，OFET 阵列平均迁移率 7.19 cm²V⁻¹s⁻¹，接触电阻 37.3 Ω·cm。MD 模拟揭示侧链与表面能协同机制，实现图案化阵列与异质结生长。',
     proj1_meta:'审稿中',
     proj2_tag:'第一作者 · 主要贡献者', proj2_title:'真空蒸镀法晶圆级单层分子晶体生长',
-    proj2_desc:'开发改进型真空蒸镀法，10 分钟内在 SiO₂/Si 衬底上直接生长连续均匀的 4 英寸晶圆级 MMC，突破非晶衬底上晶圆级 MMC 生长瓶颈。独立完成蒸镀腔体改造与装置搭建，制备高密度 OFET 阵列，并探索短沟道器件与晶圆级反相器电路集成应用。',
+    proj2_desc:'开发改进型真空蒸镀法，10 分钟内在 SiO₂/Si 衬底上直接生长连续均匀的 4 英寸晶圆级 MMC，突破非晶衬底上晶圆级 MMC 生长瓶颈。独立完成蒸镀腔体改造与装置搭建，制备兼具高迁移率与优异均匀性的晶圆级高密度 OFET 阵列，并探索短沟道器件；通过光刻图案化电极与栅极结构，采用转移集成制备晶圆级顶栅反相器阵列。',
     proj2_meta:'研究进行中',
     proj3_tag:'共同第一作者 (排名第二) · 主要贡献者', proj3_title:'PECVD 法共价富勒烯网络 (Graphullerene)',
     proj3_desc:'开发 PECVD 法生长毫米级体晶 C₆₀ 聚合物 (graphullerite)，可机械剥离至分子级薄层 graphullerene（最薄 1.5 nm）。通过 Raman、PL、SEM、TEM、AFM-IR、XPS 系统表征，TDTR/SThM 测量揭示热导率随厚度减小而增大、体晶与少层间高达十倍差异。',
     proj3_meta:'二维电子器件应用',
+    proj4_tag:'参与成员', proj4_title:'基于大语言模型的有机半导体器件研究 AI Agent',
+    proj4_desc:'参与开发基于大语言模型的有机半导体器件研究 AI Agent，实现 OFET 文献数据自动抽取、机器学习预测与数据驱动优化。基于 277 篇论文构建含 709 种器件配置、超过 10,000 条记录的标准化数据库；GPT-4 在 14 类参数上的平均精确率与召回率均超过 92%，XGBoost 分类器 F1 = 0.88，并通过优化策略将 DP-DTT OFET 迁移率提升约 3 倍。',
+    proj4_meta:'数据抽取 · 机器学习 · 器件优化',
     sec_patent:'发明专利', patent_title:'一种在非晶衬底上生长有机半导体单层薄膜的方法',
     patent_desc:'发明人：孙雅静 (导师)、<strong>谢欣怡</strong>、孙守刚、陈小松、李立强、胡文平',
     sec_awards:'荣誉奖项',
@@ -571,7 +581,8 @@ const i18n = {
     aw3_title:'全国大学生数学竞赛', aw3_desc:'国家级二等奖',
     aw4_title:'蓝桥杯 Python 竞赛', aw4_desc:'湖北省一等奖',
     aw5_title:'天津大学一等研究生奖学金', aw5_desc:'连续三年获得',
-    aw6_title:'全国能源动力类百篇优秀本科毕业论文', aw6_desc:'全国百优毕业设计',
+    aw6_title:'武汉工程大学一等奖学金', aw6_desc:'连续四年获得',
+    aw7_title:'全国能源动力类百篇优秀本科毕业论文', aw7_desc:'全国百优毕业设计',
     sec_contact:'联系方式', contact_lab:'智能传感材料国家重点实验室',
     footer_inst:'天津大学理学院'
   },
@@ -599,11 +610,14 @@ const i18n = {
     proj1_desc:'Proposed a self-limited growth strategy for directly growing centimeter-scale organic semiconductor monolayer molecular crystals (MMCs) on SiO₂/Si substrates via PVT. Achieved C₁₀-DNTT MMCs up to 8.2 cm × 2 cm, OFET arrays with average mobility of 7.19 cm²V⁻¹s⁻¹ and contact resistance of 37.3 Ω·cm. MD simulations revealed the synergistic effect of molecular side chains and substrate surface energy.',
     proj1_meta:'Under Review',
     proj2_tag:'First Author · Primary Contributor', proj2_title:'Wafer-Scale Self-Limited Growth of Monolayer Molecular Crystals via Vacuum Evaporation',
-    proj2_desc:'Developed an improved vacuum-evaporation method to directly grow continuous and uniform 4-inch wafer-scale MMCs on SiO₂/Si substrates within 10 min. Independently modified the vacuum-evaporation chamber and built the growth apparatus. Fabricated high-density OFET arrays and explored short-channel devices and wafer-scale inverter circuits.',
+    proj2_desc:'Developed an improved vacuum-evaporation method to directly grow continuous and uniform 4-inch wafer-scale MMCs on SiO₂/Si substrates within 10 min. Independently modified the vacuum-evaporation chamber and built the growth apparatus. Fabricated wafer-scale, high-density OFET arrays with high mobility and excellent device uniformity, and explored short-channel devices. Patterned electrode and gate structures by photolithography, then fabricated wafer-scale top-gate inverter arrays through transfer-based integration.',
     proj2_meta:'In Progress',
     proj3_tag:'Co-first Author (2nd) · Primary Contributor', proj3_title:'Few-Layer Covalent Fullerene Networks via PECVD (Graphullerene)',
     proj3_desc:'Developed a PECVD method to grow millimeter-scale bulk crystalline C₆₀ polymer (graphullerite), mechanically exfoliable into molecularly thin graphullerene sheets (minimum 1.5 nm). Characterized via Raman, PL, SEM, TEM, AFM-IR, and XPS. TDTR/SThM measurements revealed increasing thermal conductivity with decreasing thickness.',
     proj3_meta:'2D Electronic Device Applications',
+    proj4_tag:'Contributing Member', proj4_title:'Large-Language-Model-Based AI Agent for Organic Semiconductor Device Research',
+    proj4_desc:'Contributed to an LLM-based AI agent for automated OFET literature data extraction, machine-learning prediction, and data-guided optimization. Built a standardized database from 277 articles with 709 device configurations and over 10,000 records. GPT-4 achieved average precision and recall above 92% across 14 parameter categories; XGBoost reached F1 = 0.88, and the optimization strategy increased DP-DTT OFET mobility by approximately threefold.',
+    proj4_meta:'Data Extraction · Machine Learning · Device Optimization',
     sec_patent:'Patent', patent_title:'A Method for Growing Organic Semiconductor Monolayer Films on Amorphous Substrates',
     patent_desc:'Inventors: Yajing Sun (Advisor), <strong>Xinyi Xie</strong>, Shougang Sun, Xiaosong Chen, Liqiang Li, Wenping Hu',
     sec_awards:'Honors & Awards',
@@ -612,7 +626,8 @@ const i18n = {
     aw3_title:'Chinese Undergraduate Mathematics Competition', aw3_desc:'National Second Prize',
     aw4_title:'Lan Qiao Cup — Python Competition', aw4_desc:'Hubei Provincial First Prize',
     aw5_title:'Tianjin University First-Class Graduate Scholarship', aw5_desc:'Awarded 2024−2026',
-    aw6_title:'National Top 100 Outstanding Undergraduate Theses — Energy & Power', aw6_desc:'National Top 100',
+    aw6_title:'Wuhan Institute of Technology First-Class Scholarship', aw6_desc:'Awarded 2020−2024',
+    aw7_title:'National Top 100 Outstanding Undergraduate Theses — Energy & Power', aw7_desc:'National Top 100',
     sec_contact:'Contact', contact_lab:'State Key Lab of Advanced Materials for Intelligent Sensing',
     footer_inst:'Department of Chemistry, Tianjin University'
   }
